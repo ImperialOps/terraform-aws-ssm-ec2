@@ -16,8 +16,10 @@ module "ec2" {
   ## required
   vpc_id    = ""
   subnet_id = ""
+  ## or
+  launch_template_name = ""
 
   ## optional
   # additional_security_group_ids = []
-  # launch_template_id            = ""
+  # launch_template_version       = ""
 }

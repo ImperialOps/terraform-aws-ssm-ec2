@@ -5,6 +5,7 @@
 variable "vpc_id" {
   type        = string
   description = "Identifier of VPC to deploy EC2 instance into"
+  default     = ""
 }
 
 variable "subnet_id" {
@@ -16,10 +17,16 @@ variable "subnet_id" {
 # LAUNCH TEMPLATE
 ##########################################
 
-variable "launch_template_id" {
+variable "launch_template_name" {
   type        = string
-  description = "Identifier of lauch template to deploy EC2 from, bring your own EC2"
+  description = "The name of the launch template"
   default     = ""
+}
+
+variable "launch_template_version" {
+  type        = string
+  description = "The launch template version"
+  default     = "$Default"
 }
 
 ##########################################

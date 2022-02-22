@@ -6,7 +6,7 @@ locals {
   global_name = random_pet.global_name.id
 
   # optional variables
-  launch_template = var.launch_template_id != "" ? true : false
+  launch_template = var.launch_template_name != "" ? true : false
 }
 
 resource "random_pet" "global_name" {
@@ -18,8 +18,11 @@ resource "random_pet" "global_name" {
 ##########################################
 
 resource "aws_kms_key" "ec2_volume" {
+  count = local.launch_template ? 0 : 1
+
   description             = "KMS key for EC2 EBS volume"
   deletion_window_in_days = 10
+  policy                  = data.aws_iam_policy_document.ec2_volume.json
 }
 
 ##########################################
@@ -51,10 +54,12 @@ resource "aws_security_group_rule" "this" {
 resource "aws_iam_instance_profile" "this" {
   count = local.launch_template ? 0 : 1
 
-  role = aws_iam_role.this.name
+  role = aws_iam_role.this[0].name
 }
 
 resource "aws_iam_role" "this" {
+  count = local.launch_template ? 0 : 1
+
   name               = local.global_name
   description        = "The role for the SSM EC2 instance"
   assume_role_policy = <<EOF
@@ -70,7 +75,9 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  role       = aws_iam_role.this.name
+  count = local.launch_template ? 0 : 1
+
+  role       = aws_iam_role.this[0].name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
@@ -78,7 +85,11 @@ resource "aws_iam_role_policy_attachment" "this" {
 # COMPUTE
 ##########################################
 
-resource "aws_instance" "ec2" {
+locals {
+  device_mappings = [for device in data.aws_ami.ubuntu.block_device_mappings : device if device.virtual_name == ""]
+}
+
+resource "aws_instance" "standalone" {
   count = local.launch_template ? 0 : 1
 
   ami           = data.aws_ami.ubuntu.id
@@ -92,10 +103,30 @@ resource "aws_instance" "ec2" {
     var.additional_security_group_ids
   )
 
-  root_block_device {
-    delete_on_termination = true
-    volume_type           = "gp2"
-    volume_size           = 25
+  dynamic "ebs_block_device" {
+    for_each = local.device_mappings
+
+    content {
+      device_name           = ebs_block_device.value.device_name
+      delete_on_termination = true
+      encrypted             = true
+      kms_key_id            = aws_kms_key.ec2_volume[0].id
+      volume_size           = ebs_block_device.value.ebs.volume_size
+      volume_type           = ebs_block_device.value.ebs.volume_type
+    }
+  }
+
+  tags = {
+    Name = local.global_name
+  }
+}
+
+resource "aws_instance" "launch_template" {
+  count = local.launch_template ? 1 : 0
+
+  launch_template {
+    name    = var.launch_template_name
+    version = var.launch_template_version
   }
 
   tags = {
