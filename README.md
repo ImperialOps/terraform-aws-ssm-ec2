@@ -6,7 +6,7 @@ Terraform module which creates an SSM compatible EC2 instance on AWS. By default
 
 ```hcl
 module "ec2" {
-  source = "../.."
+  source = "github.com/stuxcd/terraform-aws-ssm-ec2"
 
   ## either
   vpc_id    = "vpc-1234567890"
