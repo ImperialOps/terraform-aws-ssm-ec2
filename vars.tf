@@ -1,4 +1,14 @@
 ##########################################
+# COMPUTE
+##########################################
+
+variable "instance_size" {
+  type        = string
+  description = "Size of the EC2 instance to deploy"
+  default     = "t3a.small"
+}
+
+##########################################
 # NETWORKING
 ##########################################
 

@@ -6,16 +6,17 @@ Terraform module which creates an SSM compatible EC2 instance on AWS. By default
 
 ```hcl
 module "ec2" {
-  source = "github.com/stuxcd/terraform-aws-ssm-ec2"
+  source    = "github.com/stuxcd/terraform-aws-ssm-ec2"
+  # version = ""
 
   ## either
   vpc_id    = "vpc-1234567890"
   subnet_id = "subnet-1234567890"
-  ## or
-  launch_template_name = "my-custom-launch-template"
 
   ## optional
   # additional_security_group_ids = []
+  # launch_template_name          = "my-custom-launch-template"
   # launch_template_version       = ""
+  # instance_size                 = ""
 }
 ```
