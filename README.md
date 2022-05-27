@@ -9,7 +9,7 @@ module "ec2" {
   source    = "github.com/stuxcd/terraform-aws-ssm-ec2"
   # version = ""
 
-  ## either
+  ## required
   vpc_id    = "vpc-1234567890"
   subnet_id = "subnet-1234567890"
 
