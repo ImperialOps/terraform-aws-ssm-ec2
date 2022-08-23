@@ -1,4 +1,4 @@
-# AWS SSM EC2 Terraform module
+# AWS SSM EC2 Terraform module :robot:
 
 Terraform module which creates an SSM compatible EC2 instance on AWS. By default, uses KMS encrypted storage.
 
