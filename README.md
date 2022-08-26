@@ -20,3 +20,7 @@ module "ec2" {
   # instance_size                 = ""
 }
 ```
+
+<!-- BEGIN_TF_DOCS -->
+{{ .Content }}
+<!-- END_TF_DOCS -->

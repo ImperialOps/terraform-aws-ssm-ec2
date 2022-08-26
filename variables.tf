@@ -4,7 +4,7 @@
 
 variable "instance_size" {
   type        = string
-  description = "Size of the EC2 instance to deploy"
+  description = "The size of the EC2 instance to deploy"
   default     = "t3a.small"
 }
 
@@ -14,13 +14,13 @@ variable "instance_size" {
 
 variable "vpc_id" {
   type        = string
-  description = "Identifier of VPC to deploy EC2 instance into"
+  description = "The identifier of VPC to deploy EC2 instance into"
   default     = ""
 }
 
 variable "subnet_id" {
   type        = string
-  description = "Identifier of subnet to deploy EC2 instance into"
+  description = "The identifier of subnet to deploy EC2 instance into"
 }
 
 ##########################################
@@ -29,7 +29,7 @@ variable "subnet_id" {
 
 variable "launch_template_name" {
   type        = string
-  description = "The name of the launch template"
+  description = "The name of the launch template to use"
   default     = ""
 }
 
@@ -45,6 +45,6 @@ variable "launch_template_version" {
 
 variable "additional_security_group_ids" {
   type        = list(string)
-  description = "Identifier of custom security group ID, replaces default"
+  description = "The identifier of a custom security group ID, replaces default"
   default     = []
 }

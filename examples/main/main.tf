@@ -17,7 +17,3 @@ module "ec2" {
   vpc_id    = ""
   subnet_id = ""
 }
-
-output "ec2_instance_name" {
-  value = module.ec2.ec2_instance_name
-}
