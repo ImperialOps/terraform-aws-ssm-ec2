@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.1.3](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.1.2...v1.1.3) (2022-08-26)
+
+
+### Bug Fixes
+
+* **infracost:** always notify on infracost changes ([8c89006](https://github.com/stuxcd/terraform-aws-ssm-ec2/commit/8c8900607b6caf3341fc497fd44865376da06601))
+
 ### [1.1.2](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.1.1...v1.1.2) (2022-08-26)
 
 
