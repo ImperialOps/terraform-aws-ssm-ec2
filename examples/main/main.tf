@@ -18,5 +18,5 @@ module "ec2" {
   subnet_id = ""
 
   ## optional
-  instance_size = "t3a.medium"
+  instance_size = "t3a.small"
 }
