@@ -93,7 +93,7 @@ resource "aws_instance" "standalone" {
   count = local.launch_template ? 0 : 1
 
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3a.small"
+  instance_type = var.instance_size
   subnet_id     = var.subnet_id
 
   iam_instance_profile = aws_iam_instance_profile.this[0].id
