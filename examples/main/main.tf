@@ -16,4 +16,8 @@ module "ec2" {
   ## required
   vpc_id    = ""
   subnet_id = ""
+
+  tags = {
+    project_code = "PO-1234"
+  }
 }
