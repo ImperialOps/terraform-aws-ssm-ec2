@@ -128,4 +128,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_ec2_instance_name"></a> [ec2\_instance\_name](#output\_ec2\_instance\_name) | The name of the EC2 instance created |
+| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | The ARN of the role created |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
