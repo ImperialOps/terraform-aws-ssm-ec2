@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.2.0...v1.3.0) (2023-04-14)
+
+
+### Features
+
+* **tags:** add volume tags ([#14](https://github.com/stuxcd/terraform-aws-ssm-ec2/issues/14)) ([a7982fa](https://github.com/stuxcd/terraform-aws-ssm-ec2/commit/a7982fa97fe5d3a1863ade1e3706e19df85e720e))
+
 ## [1.2.0](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.1.3...v1.2.0) (2023-04-14)
 
 
