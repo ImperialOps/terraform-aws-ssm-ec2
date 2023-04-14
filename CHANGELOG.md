@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.1.3...v1.2.0) (2023-04-14)
+
+
+### Features
+
+* **outputs:** add role arn output ([#12](https://github.com/stuxcd/terraform-aws-ssm-ec2/issues/12)) ([faa08c6](https://github.com/stuxcd/terraform-aws-ssm-ec2/commit/faa08c637b86647838b183a77645609f3dcb74f8))
+
 ### [1.1.3](https://github.com/stuxcd/terraform-aws-ssm-ec2/compare/v1.1.2...v1.1.3) (2022-08-26)
 
 
