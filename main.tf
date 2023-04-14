@@ -54,12 +54,8 @@ resource "aws_instance" "standalone" {
     }
   }
 
-  tags = merge(
-    local.tags,
-    {
-      Name = local.global_name
-    }
-  )
+  tags        = merge(local.tags, { Name = local.global_name })
+  volume_tags = merge(local.tags, { Name = local.global_name })
 }
 
 resource "aws_instance" "launch_template" {
@@ -70,41 +66,7 @@ resource "aws_instance" "launch_template" {
     version = var.launch_template_version
   }
 
-  tags = merge(
-    local.tags,
-    {
-      Name = local.global_name
-    }
-  )
-}
-
-##########################################
-# NETWORKING
-##########################################
-
-resource "aws_security_group" "this" {
-  count = local.create_supporting_resources ? 1 : 0
-
-  description = "Allow TLS inbound traffic"
-  vpc_id      = var.vpc_id
-
-  tags = merge(
-    local.tags,
-    {
-      Name = local.global_name
-    }
-  )
-}
-
-resource "aws_security_group_rule" "this" {
-  count = local.create_supporting_resources ? 1 : 0
-
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.this[0].id
+  tags = merge(local.tags, { Name = local.global_name })
 }
 
 ##########################################
@@ -114,14 +76,9 @@ resource "aws_security_group_rule" "this" {
 resource "aws_iam_instance_profile" "this" {
   count = local.create_supporting_resources ? 1 : 0
 
-  role = module.role.iam_role_arn
+  role = module.role.iam_role_name
 
-  tags = merge(
-    local.tags,
-    {
-      Name = local.global_name
-    }
-  )
+  tags = local.tags
 }
 
 module "role" {
@@ -141,4 +98,28 @@ module "role" {
   number_of_custom_role_policy_arns = 1
 
   tags = local.tags
+}
+
+##########################################
+# NETWORKING
+##########################################
+
+resource "aws_security_group" "this" {
+  count = local.create_supporting_resources ? 1 : 0
+
+  description = "Allow TLS inbound traffic"
+  vpc_id      = var.vpc_id
+
+  tags = merge(local.tags, { Name = local.global_name })
+}
+
+resource "aws_security_group_rule" "this" {
+  count = local.create_supporting_resources ? 1 : 0
+
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.this[0].id
 }
