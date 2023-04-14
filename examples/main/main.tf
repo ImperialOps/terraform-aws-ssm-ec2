@@ -16,7 +16,4 @@ module "ec2" {
   ## required
   vpc_id    = ""
   subnet_id = ""
-
-  ## optional
-  instance_size = "t3a.small"
 }

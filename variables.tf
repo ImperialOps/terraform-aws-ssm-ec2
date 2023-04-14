@@ -1,11 +1,27 @@
 ##########################################
+# GLOBAL
+##########################################
+
+variable "create" {
+  description = "Controls if EKS resources should be created (affects nearly all resources)"
+  type        = bool
+  default     = true
+}
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+##########################################
 # COMPUTE
 ##########################################
 
 variable "instance_size" {
   type        = string
   description = "The size of the EC2 instance to deploy"
-  default     = "t3a.small"
+  default     = "t3.micro"
 }
 
 ##########################################
