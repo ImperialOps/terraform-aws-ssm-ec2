@@ -83,7 +83,7 @@ resource "aws_iam_instance_profile" "this" {
 
 module "role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "5.17.0"
+  version = "5.25.0"
 
 
   create_role       = local.create_supporting_resources
